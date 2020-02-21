@@ -322,8 +322,8 @@ class Lexer(object):
         self.current_comand=self.comands[self.pos]
 
     def error(self):
-        QMessageBox.warning(self, "ERROR", "Invalid character", QMessageBox.Ok)
-        #raise Exception('Invalid character\nCheck FSM_logic_log.txt\n')
+        #QMessageBox.warning(self, "ERROR", "Invalid character", QMessageBox.Ok)
+        raise Exception('Invalid character\nCheck FSM_logic_log.txt\n')
 
     def advance(self):
         """Advance the `pos` pointer and set the `current_char` variable."""
