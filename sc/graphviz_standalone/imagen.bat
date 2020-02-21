@@ -1,0 +1,1 @@
+dot.exe -V

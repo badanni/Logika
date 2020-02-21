@@ -1,0 +1,7 @@
+START Prologue
+IF Prologue SEND next GOTO ch1
+IF ch1 SEND next GOTO ch2_beginnig
+IF ch2_beginnig SEND next GOTO path1
+IF ch2_beginnig SEND next2 GOTO path2
+IF ch2_beginnig SEND next3 GOTO path3
+IF ch2_beginnig SEND next5 GOTO path4
