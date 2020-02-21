@@ -1,5 +1,6 @@
 
 *.pyc
+*.docx
 sc/output/logic_renpy.txt
 sc/output/logic_renpy.rpy
 sc/output/logic
