@@ -1,0 +1,15 @@
+digraph FSM {
+	graph [rankdir=LR size="8,5"]
+	node [shape=doublecircle]
+	Prologue
+	node [shape=point]
+	qi
+	qi -> Prologue
+	node [shape=circle]
+	Prologue -> ch1 [label="['next']"]
+	ch1 -> ch2_beginnig [label="['next']"]
+	ch2_beginnig -> path1 [label="['next']"]
+	ch2_beginnig -> path2 [label="['next2']"]
+	ch2_beginnig -> path3 [label="['next3']"]
+	ch2_beginnig -> path4 [label="['next5']"]
+}

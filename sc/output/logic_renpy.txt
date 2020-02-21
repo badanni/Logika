@@ -1,0 +1,6 @@
+ERROR
+if self.state=='cas' and command in ['fd', 'qwe']: self.state='qwety'
+elif self.state=='cas' and command in ['fd', 'qwe']: self.state='qwety'
+elif self.state=='cas' and command in ['fd', 'qwe']: self.state='qwety'
+elif self.state=='cas' and command in ['fd', 'qwe']: self.state='qwety'
+ERROR
