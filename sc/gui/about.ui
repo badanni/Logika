@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>329</height>
+    <width>645</width>
+    <height>202</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>400</width>
-    <height>329</height>
+    <width>645</width>
+    <height>202</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>400</width>
-    <height>500</height>
+    <width>645</width>
+    <height>202</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -63,11 +63,17 @@
   <widget class="QLabel" name="acerca_de_etiqueta">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>150</y>
+     <x>220</x>
+     <y>10</y>
      <width>311</width>
      <height>141</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -79,14 +85,14 @@
   <widget class="QPushButton" name="acerca_de_bt_cerrar">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>20</y>
+     <x>550</x>
+     <y>170</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>OK</string>
+    <string>Close</string>
    </property>
   </widget>
  </widget>
