@@ -22,6 +22,7 @@
 #  
 #  
 import os, sys, re
+import platform
 #from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDialog, QColorDialog, QFileDialog, QDialogButtonBox
@@ -30,13 +31,17 @@ from PyQt5 import uic
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene
 
-import graphviz_standalone as gv #graphviz modified for run dot.exe precompilate
+if platform.system()=="Windows":
+  import graphviz_standalone as gv #graphviz modified for run dot.exe precompilate
+elif platform.system()=="linux":
+  import graphviz as gv
+else:
+  sys.exit("need graphviz")
 #import graphviz as gv
 ##########UI################
 class Ventana(QMainWindow):
  #Método constructor de la clase
  def __init__(self):
-  self.first_if=False
   #Iniciar el objeto QMainWindow
   QMainWindow.__init__(self)
   #Cargar la configuración del archivo .ui en el objeto
@@ -104,7 +109,6 @@ init python:
   _acerca_de.exec_()
 
  def abrir_proyecto(self):
-  self.first_if=False
   if len(self.plainTextEdit.toPlainText())!=0:
    resultado = QMessageBox.question(self, "Are you sure?", "At the moment you have a file in edition, surely you want to open a new one?", QMessageBox.Yes | QMessageBox.No)
    if resultado == QMessageBox.Yes:
@@ -115,7 +119,6 @@ init python:
    self.leer_proyecto()
 
  def guardar_proyecto(self):
-  self.first_if=False
   if len(self.plainTextEdit.toPlainText())==0:
    QMessageBox.information(self, "Document is empty", "Document is empty", QMessageBox.Close)
   elif len(self.plainTextEdit.toPlainText())!=0 and self.archivo_trabajo_LN!="":
@@ -137,7 +140,6 @@ init python:
     QMessageBox.information(self, "Project saved", "Project saved", QMessageBox.Ok)
  
  def cerrar_proyecto(self):
-  self.first_if=False
   if len(self.plainTextEdit.toPlainText())!=0:
    resultado = QMessageBox.question(self, "Are you sure?", "At the moment you have a file in edition, surely you want to close it?", QMessageBox.Yes | QMessageBox.No)
    if resultado == QMessageBox.Yes:
@@ -191,7 +193,7 @@ init python:
   for i,text in enumerate(document):
    interpreter = Interpreter(text.rstrip())
    result = interpreter.expr()
-   if result!="ERROR" and len(self.plainTextEdit.toPlainText())>0:
+   if result[0]!="ERROR" and len(self.plainTextEdit.toPlainText())>0:
     #ren'Py Logic FSM 
     text=result[0]+"\n"
     if text[:2]=="if" and self.first_if==True:
@@ -206,7 +208,9 @@ init python:
     else:
       data["conditions"].append(result[1])
    else:
-    QMessageBox.warning(self, "ERROR", "Check line", QMessageBox.Ok)
+    text="Check line %s \n"%(i)
+    self.plainTextEdit_2.insertPlainText(text)
+    QMessageBox.warning(self, "ERROR", "Check line %s"%(i), QMessageBox.Ok)
   res.close()
   
   if data["start"]!=None and len(data["conditions"])>0:
@@ -318,9 +322,8 @@ class Lexer(object):
         self.current_comand=self.comands[self.pos]
 
     def error(self):
-        print("Invalid character\nCheck FSM_logic_log.txt\n")
-        raise Exception('Invalid character\nCheck FSM_logic_log.txt\n')
-        #return Token(ERROR, str(self.current_comand))
+        QMessageBox.warning(self, "ERROR", "Invalid character", QMessageBox.Ok)
+        #raise Exception('Invalid character\nCheck FSM_logic_log.txt\n')
 
     def advance(self):
         """Advance the `pos` pointer and set the `current_char` variable."""
@@ -370,7 +373,8 @@ class Interpreter():
         self.pos = 0
         self.current_token = None
     def error(self):
-        raise Exception('Error parsing input')
+        pass
+        #raise Exception('Error parsing input')
 
     def eat(self, token_type):
         # compare the current token type with the passed token
@@ -380,7 +384,8 @@ class Interpreter():
         if self.current_token.type == token_type:
             self.current_token = self.lexer.get_next_token()
         else:
-            self.error()
+            self.current_token = Token("ERROR","<<----ERROR|")
+            #self.error()
 
     def expr(self):
         self.current_token = self.lexer.get_next_token()
