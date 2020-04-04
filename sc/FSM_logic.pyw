@@ -182,7 +182,6 @@ init python:
   #
   
   error_general=False
-  datos=data_translate()
   self.plainTextEdit_2.setPlainText("")
   self.plainTextEdit_3.setPlainText("")
   res = open("output/logic_renpy.txt", "w")
@@ -268,13 +267,6 @@ init python:
     #
   rpy.close()
 
-class data_translate(object):
-  def __init__(self):
-   self.start=""
-   self.states=[]
-   self.error1=0
-   self.error2=0
-
 class Acerca_de(QDialog):
  #Método constructor de la clase
  def __init__(self):
@@ -289,7 +281,6 @@ class Acerca_de(QDialog):
 
 #############LOGIC##########
 START,IF, SEND, OR, GOTO,STRING, INTEGER, EOF= ('START','IF', 'SEND', 'OR', 'GOTO','STRING','INTEGER','EOF')
-
 
 class Token(object):
     def __init__(self, type, value):
